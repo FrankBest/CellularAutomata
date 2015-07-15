@@ -1,6 +1,6 @@
 int colorvalue = (int)random(0,2);
-int m = 50;//width
-int n = 50;//height
+int m = 30;//width
+int n = 30;//height
 int p[][]  = new int[m][n];
 int copy[][] = new int[m][n];
 
