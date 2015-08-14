@@ -3,7 +3,7 @@ int m = 50;//width
 int n = 50;//height
 int p[][]  = new int[m][n];
 int copy[][] = new int[m][n];
-
+float RATE = 30;
 
 void copyArray(int[][] a, int[][] b, int xLen, int yLen)
 {
@@ -44,10 +44,38 @@ int getMy8SiblingsSum(int[][] a, int xCoord, int yCoord, int xLen, int yLen)
   return retVal;
 }
 
+void SWITCH(float a)
+{
+  float RECTX = (RATE-5)*width/45;
+  if( mousePressed && mouseX >= 20 && mouseX <= width-20 && mouseY >= height-20 && mouseY <= height){
+    RATE = 45*a/width+5;
+    RECTX = a;
+  }
+  fill(255);
+  rect(RECTX-20,n*10+1,40,18);
+}
+
+void CLEAR(){
+  for (int i = 0; i < m; i++)
+    {
+      for(int j = 0; j < n; j++) {
+        p[i][j] = 0;
+      }
+    }
+}
+
+void CREATE1()
+{
+  if (mousePressed == true && mouseX < width && mouseX >= 0 && mouseY < height-20 && mouseY >= 0) {
+  p[(mouseX-mouseX%10)/10][(mouseY-mouseY%10)/10] = 1;
+  }
+}
+
 void setup()
 {
-  size(10 * m,10 * n);
+  size(10 * m,10 * (n+2));
   background(255);
+  frameRate(RATE);
   for (int i = 0; i < m; i++)
   {
     for(int j = 0; j < n; j++) {
@@ -59,20 +87,30 @@ void setup()
   }
 }
 
+
 void draw()
 {
   copyArray(p, copy, m, n);
-
   int sibsum;
-  for(int i = 0; i < m; i++)
-  {
-    for(int j = 0; j < n; j++) {
-       sibsum = getMy8SiblingsSum(copy, i, j, m, n);
-       if (sibsum > 3 || sibsum < 2) p[i][j] = 0;
-       else if (sibsum == 3) p[i][j] = 1;
-    }
-  }  
-
+  boolean RUN = true;
+  if (keyPressed && key =='p') RUN = ! RUN;
+  if (RUN == true){
+    frameRate(100);
+    for(int i = 0; i < m; i++)
+    {
+      for(int j = 0; j < n; j++) {
+         sibsum = getMy8SiblingsSum(copy, i, j, m, n);
+         if (sibsum > 3 || sibsum < 2) p[i][j] = 0;
+         else if (sibsum == 3) p[i][j] = 1;
+      }
+    }  
+    frameRate(RATE);
+  }
+  CREATE1();
+  fill(127);
+  rect(0,height-20,width,20);
+  SWITCH(mouseX);
+  if (keyPressed && key == 'c') CLEAR();
   for(int i = 0; i < m; i++)
   {
     for(int j = 0; j < n; j++) {
@@ -80,8 +118,9 @@ void draw()
       rect(10 * i, 10 * j, 10, 10);
     }
   }  
+    fill(0);
+    text(frameRate,0,20);
 }
-
 
 
 
