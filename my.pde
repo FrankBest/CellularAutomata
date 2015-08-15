@@ -36,7 +36,7 @@ int getMy8SiblingsSum(int[][] a, int xCoord, int yCoord, int xLen, int yLen)
   retVal += getValueAt(a, xCoord -1, yCoord, m, n);
   retVal += getValueAt(a, xCoord -1, yCoord + 1, m, n);
   retVal += getValueAt(a, xCoord, yCoord - 1, m, n);
-  retVal += getValueAt(a, xCoord, yCoord + 1, m, n);
+  retVal += getValueAt(a, xCoord,d yCoord + 1, m, n);
   retVal += getValueAt(a, xCoord +1, yCoord -1, m, n);
   retVal += getValueAt(a, xCoord +1, yCoord, m, n);
   retVal += getValueAt(a, xCoord +1, yCoord + 1, m, n);
@@ -93,9 +93,10 @@ void draw()
   copyArray(p, copy, m, n);
   int sibsum;
   boolean RUN = true;
-  if (keyPressed && key =='p') RUN = ! RUN;
+  if (mousePressed || (keyPressed && key == 'p')) RUN = ! RUN;
+  frameRate(100);
   if (RUN == true){
-    frameRate(100);
+    frameRate(RATE);
     for(int i = 0; i < m; i++)
     {
       for(int j = 0; j < n; j++) {
@@ -104,7 +105,6 @@ void draw()
          else if (sibsum == 3) p[i][j] = 1;
       }
     }  
-    frameRate(RATE);
   }
   CREATE1();
   fill(127);
