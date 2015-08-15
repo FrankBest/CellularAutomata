@@ -36,7 +36,7 @@ int getMy8SiblingsSum(int[][] a, int xCoord, int yCoord, int xLen, int yLen)
   retVal += getValueAt(a, xCoord -1, yCoord, m, n);
   retVal += getValueAt(a, xCoord -1, yCoord + 1, m, n);
   retVal += getValueAt(a, xCoord, yCoord - 1, m, n);
-  retVal += getValueAt(a, xCoord,d yCoord + 1, m, n);
+  retVal += getValueAt(a, xCoord, yCoord + 1, m, n);
   retVal += getValueAt(a, xCoord +1, yCoord -1, m, n);
   retVal += getValueAt(a, xCoord +1, yCoord, m, n);
   retVal += getValueAt(a, xCoord +1, yCoord + 1, m, n);
